@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assests/crown.svg";
 import "./header.styles.scss";
 import CartIcon from "../cart-icon/cart-icon.component";
-import { Cart } from "../cart-dropdown/cart-dropdown.component";
+import Cart from "../cart-dropdown/cart-dropdown.component";
 import { auth } from "../../firebase/firebase.utils";
 
 const Header = ({ currentUser, hidden }) => (
