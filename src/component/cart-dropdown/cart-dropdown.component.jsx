@@ -1,22 +1,31 @@
 import React from "react";
 import CustomButton from "../custom-button/custom-button.component";
+import { withRouter } from "react-router-dom";
 import "./cart-dropdown.styles.scss";
+import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import CartItem from "../cartItem/cart-item.component";
+import { selectCartItems } from "../../redux/cart/cart.selectors";
 
-const Cart = ({ cartItems }) => (
+const Cart = ({ cartItems, history }) => (
   <div className="cart-dropdown">
     <div className="cart-items">
-      {cartItems.map((cartItem) => (
-        <CartItem key={cartItem.id} item={cartItem} />
-      ))}
+      {cartItems.length ? (
+        cartItems.map((cartItem) => (
+          <CartItem key={cartItem.id} item={cartItem} />
+        ))
+      ) : (
+        <span className="empty-cart">Your Cart is Empty</span>
+      )}
     </div>
-    <CustomButton>GO TO CHECKOUT</CustomButton>
+    <CustomButton onClick={() => history.push("/checkout")}>
+      GO TO CHECKOUT
+    </CustomButton>
   </div>
 );
 
-const mapStateToProps = ({ cart: { cartItems } }) => ({
-  cartItems,
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartItems,
 });
 
-export default connect(mapStateToProps)(Cart);
+export default withRouter(connect(mapStateToProps)(Cart));
