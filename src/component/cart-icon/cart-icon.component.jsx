@@ -12,7 +12,6 @@ const CartIcon = ({ toggleCart, itemCount }) => (
     <span className="item-count">{itemCount}</span>
   </div>
 );
-
 const mapDispatchToProps = (dispatch) => ({
   toggleCart: () => dispatch(toggleCart()),
 });
